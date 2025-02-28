@@ -1,6 +1,9 @@
-use hyperswitch_domain_models::router_flow_types::{PostAuthenticate, PreAuthenticate};
+use hyperswitch_domain_models::router_flow_types::{
+    Authenticate, AuthenticationConfirmation, PostAuthenticate, PreAuthenticate,
+};
 use hyperswitch_interfaces::api::{
-    UasPostAuthenticationV2, UasPreAuthenticationV2, UnifiedAuthenticationServiceV2,
+    UasAuthenticationConfirmationV2, UasAuthenticationV2, UasPostAuthenticationV2,
+    UasPreAuthenticationV2, UnifiedAuthenticationServiceV2,
 };
 
 #[cfg(feature = "frm")]
@@ -695,25 +698,15 @@ macro_rules! default_imp_for_new_connector_integration_payment {
 }
 
 default_imp_for_new_connector_integration_payment!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -724,7 +717,6 @@ default_imp_for_new_connector_integration_payment!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wellsfargopayout,
     connector::Wise,
     connector::Plaid
@@ -747,25 +739,15 @@ macro_rules! default_imp_for_new_connector_integration_refund {
 }
 
 default_imp_for_new_connector_integration_refund!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -776,7 +758,6 @@ default_imp_for_new_connector_integration_refund!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -793,25 +774,15 @@ macro_rules! default_imp_for_new_connector_integration_connector_access_token {
 }
 
 default_imp_for_new_connector_integration_connector_access_token!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -822,7 +793,6 @@ default_imp_for_new_connector_integration_connector_access_token!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -861,25 +831,15 @@ macro_rules! default_imp_for_new_connector_integration_submit_evidence {
 }
 
 default_imp_for_new_connector_integration_accept_dispute!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -890,7 +850,6 @@ default_imp_for_new_connector_integration_accept_dispute!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -911,25 +870,15 @@ macro_rules! default_imp_for_new_connector_integration_defend_dispute {
     };
 }
 default_imp_for_new_connector_integration_defend_dispute!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -940,30 +889,19 @@ default_imp_for_new_connector_integration_defend_dispute!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
 default_imp_for_new_connector_integration_submit_evidence!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -974,7 +912,6 @@ default_imp_for_new_connector_integration_submit_evidence!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1006,25 +943,15 @@ macro_rules! default_imp_for_new_connector_integration_file_upload {
 }
 
 default_imp_for_new_connector_integration_file_upload!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1035,7 +962,6 @@ default_imp_for_new_connector_integration_file_upload!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1062,6 +988,7 @@ default_imp_for_new_connector_integration_payouts!(
     connector::Boku,
     connector::Braintree,
     connector::Cashtocode,
+    connector::Chargebee,
     connector::Checkout,
     connector::Cryptopay,
     connector::Coinbase,
@@ -1075,6 +1002,7 @@ default_imp_for_new_connector_integration_payouts!(
     connector::Fiservemea,
     connector::Fiuu,
     connector::Forte,
+    connector::Getnet,
     connector::Globalpay,
     connector::Globepay,
     connector::Gpayments,
@@ -1086,6 +1014,7 @@ default_imp_for_new_connector_integration_payouts!(
     connector::Klarna,
     connector::Mifinity,
     connector::Mollie,
+    connector::Moneris,
     connector::Multisafepay,
     connector::Netcetera,
     connector::Nexinets,
@@ -1094,7 +1023,6 @@ default_imp_for_new_connector_integration_payouts!(
     connector::Nomupay,
     connector::Noon,
     connector::Novalnet,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Paybox,
@@ -1102,6 +1030,7 @@ default_imp_for_new_connector_integration_payouts!(
     connector::Payme,
     connector::Payone,
     connector::Paypal,
+    connector::Paystack,
     connector::Payu,
     connector::Powertranz,
     connector::Rapyd,
@@ -1120,7 +1049,6 @@ default_imp_for_new_connector_integration_payouts!(
     connector::Tsys,
     connector::UnifiedAuthenticationService,
     connector::Volt,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Worldline,
     connector::Worldpay,
@@ -1148,25 +1076,15 @@ macro_rules! default_imp_for_new_connector_integration_payouts_create {
 
 #[cfg(feature = "payouts")]
 default_imp_for_new_connector_integration_payouts_create!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1177,7 +1095,6 @@ default_imp_for_new_connector_integration_payouts_create!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1201,25 +1118,15 @@ macro_rules! default_imp_for_new_connector_integration_payouts_eligibility {
 
 #[cfg(feature = "payouts")]
 default_imp_for_new_connector_integration_payouts_eligibility!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1230,7 +1137,6 @@ default_imp_for_new_connector_integration_payouts_eligibility!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1254,25 +1160,15 @@ macro_rules! default_imp_for_new_connector_integration_payouts_fulfill {
 
 #[cfg(feature = "payouts")]
 default_imp_for_new_connector_integration_payouts_fulfill!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1283,7 +1179,6 @@ default_imp_for_new_connector_integration_payouts_fulfill!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1307,25 +1202,15 @@ macro_rules! default_imp_for_new_connector_integration_payouts_cancel {
 
 #[cfg(feature = "payouts")]
 default_imp_for_new_connector_integration_payouts_cancel!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1336,7 +1221,6 @@ default_imp_for_new_connector_integration_payouts_cancel!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1360,25 +1244,15 @@ macro_rules! default_imp_for_new_connector_integration_payouts_quote {
 
 #[cfg(feature = "payouts")]
 default_imp_for_new_connector_integration_payouts_quote!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1389,7 +1263,6 @@ default_imp_for_new_connector_integration_payouts_quote!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1413,25 +1286,15 @@ macro_rules! default_imp_for_new_connector_integration_payouts_recipient {
 
 #[cfg(feature = "payouts")]
 default_imp_for_new_connector_integration_payouts_recipient!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1442,7 +1305,6 @@ default_imp_for_new_connector_integration_payouts_recipient!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1467,24 +1329,14 @@ macro_rules! default_imp_for_new_connector_integration_payouts_sync {
 #[cfg(feature = "payouts")]
 default_imp_for_new_connector_integration_payouts_sync!(
     connector::Adyenplatform,
-    connector::Aci,
     connector::Adyen,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1495,7 +1347,6 @@ default_imp_for_new_connector_integration_payouts_sync!(
     connector::Stripe,
     connector::Threedsecureio,
     connector::Trustpay,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1519,25 +1370,15 @@ macro_rules! default_imp_for_new_connector_integration_payouts_recipient_account
 
 #[cfg(feature = "payouts")]
 default_imp_for_new_connector_integration_payouts_recipient_account!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1548,7 +1389,6 @@ default_imp_for_new_connector_integration_payouts_recipient_account!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1570,25 +1410,15 @@ macro_rules! default_imp_for_new_connector_integration_webhook_source_verificati
 }
 
 default_imp_for_new_connector_integration_webhook_source_verification!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1599,7 +1429,6 @@ default_imp_for_new_connector_integration_webhook_source_verification!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1621,17 +1450,16 @@ default_imp_for_new_connector_integration_frm!(
     connector::Authorizedotnet,
     connector::Bambora,
     connector::Bamboraapac,
-    connector::Bankofamerica,
     connector::Billwerk,
     connector::Bitpay,
     connector::Bluesnap,
     connector::Boku,
     connector::Braintree,
     connector::Cashtocode,
+    connector::Chargebee,
     connector::Checkout,
     connector::Cryptopay,
     connector::Coinbase,
-    connector::Cybersource,
     connector::Deutschebank,
     connector::Digitalvirgo,
     connector::Dlocal,
@@ -1641,6 +1469,7 @@ default_imp_for_new_connector_integration_frm!(
     connector::Fiservemea,
     connector::Forte,
     connector::Fiuu,
+    connector::Getnet,
     connector::Globalpay,
     connector::Globepay,
     connector::Gpayments,
@@ -1652,6 +1481,7 @@ default_imp_for_new_connector_integration_frm!(
     connector::Klarna,
     connector::Mifinity,
     connector::Mollie,
+    connector::Moneris,
     connector::Multisafepay,
     connector::Netcetera,
     connector::Nexinets,
@@ -1660,7 +1490,6 @@ default_imp_for_new_connector_integration_frm!(
     connector::Nomupay,
     connector::Noon,
     connector::Novalnet,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Paybox,
@@ -1668,6 +1497,7 @@ default_imp_for_new_connector_integration_frm!(
     connector::Payme,
     connector::Payone,
     connector::Paypal,
+    connector::Paystack,
     connector::Payu,
     connector::Powertranz,
     connector::Rapyd,
@@ -1686,7 +1516,6 @@ default_imp_for_new_connector_integration_frm!(
     connector::Tsys,
     connector::UnifiedAuthenticationService,
     connector::Volt,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Worldline,
     connector::Worldpay,
@@ -1714,25 +1543,15 @@ macro_rules! default_imp_for_new_connector_integration_frm_sale {
 
 #[cfg(feature = "frm")]
 default_imp_for_new_connector_integration_frm_sale!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1743,7 +1562,6 @@ default_imp_for_new_connector_integration_frm_sale!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1767,25 +1585,15 @@ macro_rules! default_imp_for_new_connector_integration_frm_checkout {
 
 #[cfg(feature = "frm")]
 default_imp_for_new_connector_integration_frm_checkout!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1796,7 +1604,6 @@ default_imp_for_new_connector_integration_frm_checkout!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1820,25 +1627,15 @@ macro_rules! default_imp_for_new_connector_integration_frm_transaction {
 
 #[cfg(feature = "frm")]
 default_imp_for_new_connector_integration_frm_transaction!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1849,7 +1646,6 @@ default_imp_for_new_connector_integration_frm_transaction!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1873,25 +1669,15 @@ macro_rules! default_imp_for_new_connector_integration_frm_fulfillment {
 
 #[cfg(feature = "frm")]
 default_imp_for_new_connector_integration_frm_fulfillment!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1902,7 +1688,6 @@ default_imp_for_new_connector_integration_frm_fulfillment!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1926,25 +1711,15 @@ macro_rules! default_imp_for_new_connector_integration_frm_record_return {
 
 #[cfg(feature = "frm")]
 default_imp_for_new_connector_integration_frm_record_return!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -1955,7 +1730,6 @@ default_imp_for_new_connector_integration_frm_record_return!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -1976,25 +1750,15 @@ macro_rules! default_imp_for_new_connector_integration_revoking_mandates {
 }
 
 default_imp_for_new_connector_integration_revoking_mandates!(
-    connector::Aci,
     connector::Adyen,
     connector::Adyenplatform,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -2005,7 +1769,6 @@ default_imp_for_new_connector_integration_revoking_mandates!(
     connector::Stripe,
     connector::Trustpay,
     connector::Threedsecureio,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Plaid
 );
@@ -2067,6 +1830,7 @@ default_imp_for_new_connector_integration_connector_authentication!(
     connector::Boku,
     connector::Braintree,
     connector::Cashtocode,
+    connector::Chargebee,
     connector::Checkout,
     connector::Cryptopay,
     connector::Coinbase,
@@ -2081,6 +1845,7 @@ default_imp_for_new_connector_integration_connector_authentication!(
     connector::Fiservemea,
     connector::Forte,
     connector::Fiuu,
+    connector::Getnet,
     connector::Globalpay,
     connector::Globepay,
     connector::Gocardless,
@@ -2093,6 +1858,7 @@ default_imp_for_new_connector_integration_connector_authentication!(
     connector::Klarna,
     connector::Mifinity,
     connector::Mollie,
+    connector::Moneris,
     connector::Multisafepay,
     connector::Netcetera,
     connector::Nexinets,
@@ -2109,6 +1875,7 @@ default_imp_for_new_connector_integration_connector_authentication!(
     connector::Payme,
     connector::Payone,
     connector::Paypal,
+    connector::Paystack,
     connector::Payu,
     connector::Placetopay,
     connector::Powertranz,
@@ -2129,7 +1896,6 @@ default_imp_for_new_connector_integration_connector_authentication!(
     connector::Tsys,
     connector::UnifiedAuthenticationService,
     connector::Volt,
-    connector::Wellsfargo,
     connector::Wise,
     connector::Worldline,
     connector::Worldpay,
@@ -2144,6 +1910,8 @@ macro_rules! default_imp_for_new_connector_integration_uas {
         $( impl UnifiedAuthenticationServiceV2 for $path::$connector {}
             impl UasPreAuthenticationV2 for $path::$connector {}
             impl UasPostAuthenticationV2 for $path::$connector {}
+            impl UasAuthenticationConfirmationV2 for $path::$connector {}
+            impl UasAuthenticationV2 for $path::$connector {}
             impl
             services::ConnectorIntegrationV2<
             PreAuthenticate,
@@ -2160,30 +1928,35 @@ macro_rules! default_imp_for_new_connector_integration_uas {
             types::UasAuthenticationResponseData,
         > for $path::$connector
         {}
+        impl
+            services::ConnectorIntegrationV2<
+            AuthenticationConfirmation,
+            types::UasFlowData,
+            types::UasConfirmationRequestData,
+            types::UasAuthenticationResponseData,
+        > for $path::$connector
+        {}
+        impl services::ConnectorIntegrationV2<
+            Authenticate,
+            types::UasFlowData,
+            types::UasAuthenticationRequestData,
+            types::UasAuthenticationResponseData,
+        > for $path::$connector
+        {}
     )*
     };
 }
 
 default_imp_for_new_connector_integration_uas!(
     connector::Adyenplatform,
-    connector::Aci,
     connector::Adyen,
     connector::Authorizedotnet,
-    connector::Bankofamerica,
-    connector::Braintree,
     connector::Checkout,
-    connector::Cybersource,
     connector::Ebanx,
-    connector::Globalpay,
     connector::Gpayments,
-    connector::Iatapay,
-    connector::Itaubank,
-    connector::Klarna,
-    connector::Mifinity,
     connector::Netcetera,
     connector::Nmi,
     connector::Noon,
-    connector::Nuvei,
     connector::Opayo,
     connector::Opennode,
     connector::Payme,
@@ -2195,7 +1968,6 @@ default_imp_for_new_connector_integration_uas!(
     connector::Stripe,
     connector::Threedsecureio,
     connector::Trustpay,
-    connector::Wellsfargo,
     connector::Wellsfargopayout,
     connector::Wise
 );
