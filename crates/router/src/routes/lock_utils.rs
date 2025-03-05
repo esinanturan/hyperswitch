@@ -39,6 +39,8 @@ pub enum ApiIdentifier {
     ApplePayCertificatesMigration,
     Relay,
     Documentation,
+    Hypersense,
+    PaymentMethodSession,
 }
 
 impl From<Flow> for ApiIdentifier {
@@ -146,7 +148,10 @@ impl From<Flow> for ApiIdentifier {
             | Flow::PaymentsGetIntent
             | Flow::PaymentsPostSessionTokens
             | Flow::PaymentsUpdateIntent
-            | Flow::PaymentStartRedirection => Self::Payments,
+            | Flow::PaymentsCreateAndConfirmIntent
+            | Flow::PaymentStartRedirection
+            | Flow::ProxyConfirmIntent
+            | Flow::PaymentsRetrieveUsingMerchantReferenceId => Self::Payments,
 
             Flow::PayoutsCreate
             | Flow::PayoutsRetrieve
@@ -174,7 +179,8 @@ impl From<Flow> for ApiIdentifier {
             | Flow::IncomingRelayWebhookReceive
             | Flow::WebhookEventInitialDeliveryAttemptList
             | Flow::WebhookEventDeliveryAttemptList
-            | Flow::WebhookEventDeliveryRetry => Self::Webhooks,
+            | Flow::WebhookEventDeliveryRetry
+            | Flow::RecoveryIncomingWebhookReceive => Self::Webhooks,
 
             Flow::ApiKeyCreate
             | Flow::ApiKeyRetrieve
@@ -191,7 +197,10 @@ impl From<Flow> for ApiIdentifier {
             | Flow::DisputesAggregate
             | Flow::DeleteDisputeEvidence => Self::Disputes,
 
-            Flow::CardsInfo => Self::CardsInfo,
+            Flow::CardsInfo
+            | Flow::CardsInfoCreate
+            | Flow::CardsInfoUpdate
+            | Flow::CardsInfoMigrate => Self::CardsInfo,
 
             Flow::CreateFile | Flow::DeleteFile | Flow::RetrieveFile => Self::Files,
 
@@ -307,6 +316,16 @@ impl From<Flow> for ApiIdentifier {
             Flow::RetrievePollStatus => Self::Poll,
 
             Flow::FeatureMatrix => Self::Documentation,
+
+            Flow::HypersenseTokenRequest
+            | Flow::HypersenseVerifyToken
+            | Flow::HypersenseSignoutToken => Self::Hypersense,
+
+            Flow::PaymentMethodSessionCreate
+            | Flow::PaymentMethodSessionRetrieve
+            | Flow::PaymentMethodSessionConfirm
+            | Flow::PaymentMethodSessionUpdateSavedPaymentMethod
+            | Flow::PaymentMethodSessionUpdate => Self::PaymentMethodSession,
         }
     }
 }

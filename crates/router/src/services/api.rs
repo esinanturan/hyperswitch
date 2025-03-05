@@ -592,7 +592,6 @@ async fn handle_response(
 
             match status_code {
                 200..=202 | 302 | 204 => {
-                    logger::debug!(response=?response);
                     // If needed add log line
                     // logger:: error!( error_parsing_response=?err);
                     let response = response
@@ -1589,6 +1588,7 @@ pub fn build_redirection_form(
             client_token,
             card_token,
             bin,
+            acs_url,
         } => {
             maud::html! {
             (maud::DOCTYPE)
@@ -1665,7 +1665,7 @@ pub fn build_redirection_form(
                                                 }} else {{
                                                     // console.log(payload);
                                                     var f = document.createElement('form');
-                                                    f.action=window.location.pathname.replace(/payments\\/redirect\\/(\\w+)\\/(\\w+)\\/\\w+/, \"payments/$1/$2/redirect/complete/braintree\");
+                                                    f.action=\"{acs_url}\";
                                                     var i = document.createElement('input');
                                                     i.type = 'hidden';
                                                     f.method='POST';
