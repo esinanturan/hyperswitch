@@ -16,6 +16,8 @@ pub mod payouts;
 pub mod payouts_v2;
 pub mod refunds;
 pub mod refunds_v2;
+pub mod revenue_recovery;
+pub mod revenue_recovery_v2;
 
 use common_enums::{
     enums::{CallConnectorAction, CaptureMethod, EventClass, PaymentAction, PaymentMethodType},
@@ -34,12 +36,13 @@ use hyperswitch_domain_models::{
         UasFlowData,
     },
     router_flow_types::{
-        mandate_revoke::MandateRevoke, AccessTokenAuth, PostAuthenticate, PreAuthenticate,
-        VerifyWebhookSource,
+        mandate_revoke::MandateRevoke, AccessTokenAuth, Authenticate, AuthenticationConfirmation,
+        PostAuthenticate, PreAuthenticate, VerifyWebhookSource,
     },
     router_request_types::{
         unified_authentication_service::{
-            UasAuthenticationResponseData, UasPostAuthenticationRequestData,
+            UasAuthenticationRequestData, UasAuthenticationResponseData,
+            UasConfirmationRequestData, UasPostAuthenticationRequestData,
             UasPreAuthenticationRequestData,
         },
         AccessTokenRequestData, MandateRevokeRequestData, VerifyWebhookSourceRequestData,
@@ -371,7 +374,11 @@ pub trait ConnectorVerifyWebhookSourceV2:
 
 /// trait UnifiedAuthenticationService
 pub trait UnifiedAuthenticationService:
-    ConnectorCommon + UasPreAuthentication + UasPostAuthentication
+    ConnectorCommon
+    + UasPreAuthentication
+    + UasPostAuthentication
+    + UasAuthenticationConfirmation
+    + UasAuthentication
 {
 }
 
@@ -395,9 +402,29 @@ pub trait UasPostAuthentication:
 {
 }
 
+/// trait UasAuthenticationConfirmation
+pub trait UasAuthenticationConfirmation:
+    ConnectorIntegration<
+    AuthenticationConfirmation,
+    UasConfirmationRequestData,
+    UasAuthenticationResponseData,
+>
+{
+}
+
+/// trait UasAuthentication
+pub trait UasAuthentication:
+    ConnectorIntegration<Authenticate, UasAuthenticationRequestData, UasAuthenticationResponseData>
+{
+}
+
 /// trait UnifiedAuthenticationServiceV2
 pub trait UnifiedAuthenticationServiceV2:
-    ConnectorCommon + UasPreAuthenticationV2 + UasPostAuthenticationV2
+    ConnectorCommon
+    + UasPreAuthenticationV2
+    + UasPostAuthenticationV2
+    + UasAuthenticationV2
+    + UasAuthenticationConfirmationV2
 {
 }
 
@@ -418,6 +445,28 @@ pub trait UasPostAuthenticationV2:
     PostAuthenticate,
     UasFlowData,
     UasPostAuthenticationRequestData,
+    UasAuthenticationResponseData,
+>
+{
+}
+
+/// trait UasAuthenticationConfirmationV2
+pub trait UasAuthenticationConfirmationV2:
+    ConnectorIntegrationV2<
+    AuthenticationConfirmation,
+    UasFlowData,
+    UasConfirmationRequestData,
+    UasAuthenticationResponseData,
+>
+{
+}
+
+/// trait UasAuthenticationV2
+pub trait UasAuthenticationV2:
+    ConnectorIntegrationV2<
+    Authenticate,
+    UasFlowData,
+    UasAuthenticationRequestData,
     UasAuthenticationResponseData,
 >
 {
