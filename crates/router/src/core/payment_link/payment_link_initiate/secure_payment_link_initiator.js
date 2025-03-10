@@ -31,7 +31,8 @@ if (!isFramed) {
   function initializeSDK() {
     // @ts-ignore
     var paymentDetails = window.__PAYMENT_DETAILS;
-    var client_secret = paymentDetails.client_secret;
+    var clientSecret = paymentDetails.client_secret;
+    var sdkUiRules = paymentDetails.sdk_ui_rules;
     var appearance = {
       variables: {
         colorPrimary: paymentDetails.theme || "rgb(0, 109, 249)",
@@ -45,15 +46,23 @@ if (!isFramed) {
         colorBackground: "rgb(255, 255, 255)",
       },
     };
+    if (sdkUiRules !== null && typeof sdkUiRules === "object" && Object.getPrototypeOf(sdkUiRules) === Object.prototype) {
+      appearance.rules = sdkUiRules;
+    }
     // @ts-ignore
     hyper = window.Hyper(pub_key, {
       isPreloadEnabled: false,
+      // TODO: Remove in next deployment
       shouldUseTopRedirection: true,
+      redirectionFlags: {
+        shouldRemoveBeforeUnloadEvents: true,
+        shouldUseTopRedirection: true,
+      },
     });
     // @ts-ignore
     widgets = hyper.widgets({
       appearance: appearance,
-      clientSecret: client_secret,
+      clientSecret: clientSecret,
       locale: paymentDetails.locale,
     });
     var type =
@@ -82,6 +91,7 @@ if (!isFramed) {
       },
       hideCardNicknameField: hideCardNicknameField,
       showCardFormByDefault: paymentDetails.show_card_form_by_default,
+      customMessageForCardTerms: paymentDetails.custom_message_for_card_terms,
     };
     // @ts-ignore
     unifiedCheckout = widgets.create("payment", unifiedCheckoutOptions);
@@ -104,9 +114,19 @@ if (!isFramed) {
   function redirectToStatus() {
     var paymentDetails = window.__PAYMENT_DETAILS;
     var arr = window.location.pathname.split("/");
-    arr.splice(0, 3);
-    arr.unshift("status");
-    arr.unshift("payment_link");
+
+    // NOTE - This code preserves '/api' in url for integ and sbx envs
+    // e.g. url for integ/sbx - https://integ.hyperswitch.io/api/payment_link/s/merchant_1234/pay_1234?locale=en
+    // e.g. url for others - https://abc.dev.com/payment_link/s/merchant_1234/pay_1234?locale=en
+    var hasApiInPath = arr.includes("api");
+    if (hasApiInPath) {
+      arr.splice(0, 4);
+      arr.unshift("api", "payment_link", "status");
+    } else {
+      arr.splice(0, 3);
+      arr.unshift("payment_link", "status");
+    }
+
     let returnUrl =
       window.location.origin +
       "/" +
@@ -122,9 +142,10 @@ if (!isFramed) {
       var { paymentId, merchantId, attemptId, connector } = parseRoute(url);
       var urlToPost = getEnvRoute(url);
       var message = {
-        message: "CRITICAL ERROR - Failed to redirect top document. Falling back to redirecting using window.location",
+        message:
+          "CRITICAL ERROR - Failed to redirect top document. Falling back to redirecting using window.location",
         reason: error.message,
-      }
+      };
       var log = {
         message,
         url,

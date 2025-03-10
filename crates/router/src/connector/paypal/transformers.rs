@@ -622,7 +622,7 @@ impl<F, T>
                 network_txn_id: None,
                 connector_response_reference_id: Some(info_response.id.clone()),
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })
@@ -762,6 +762,7 @@ fn get_payment_source(
             .into())
         }
         domain::BankRedirectData::Bizum {}
+        | domain::BankRedirectData::Eft { .. }
         | domain::BankRedirectData::Interac { .. }
         | domain::BankRedirectData::OnlineBankingCzechRepublic { .. }
         | domain::BankRedirectData::OnlineBankingFinland { .. }
@@ -1044,6 +1045,7 @@ impl TryFrom<&PaypalRouterData<&types::PaymentsAuthorizeRouterData>> for PaypalP
                 domain::WalletData::AliPayQr(_)
                 | domain::WalletData::AliPayRedirect(_)
                 | domain::WalletData::AliPayHkRedirect(_)
+                | domain::WalletData::AmazonPayRedirect(_)
                 | domain::WalletData::MomoRedirect(_)
                 | domain::WalletData::KakaoPayRedirect(_)
                 | domain::WalletData::GoPayRedirect(_)
@@ -1134,6 +1136,7 @@ impl TryFrom<&PaypalRouterData<&types::PaymentsAuthorizeRouterData>> for PaypalP
                     | enums::PaymentMethodType::AliPay
                     | enums::PaymentMethodType::AliPayHk
                     | enums::PaymentMethodType::Alma
+                    | enums::PaymentMethodType::AmazonPay
                     | enums::PaymentMethodType::ApplePay
                     | enums::PaymentMethodType::Atome
                     | enums::PaymentMethodType::Bacs
@@ -1156,6 +1159,7 @@ impl TryFrom<&PaypalRouterData<&types::PaymentsAuthorizeRouterData>> for PaypalP
                     | enums::PaymentMethodType::DirectCarrierBilling
                     | enums::PaymentMethodType::DuitNow
                     | enums::PaymentMethodType::Efecty
+                    | enums::PaymentMethodType::Eft
                     | enums::PaymentMethodType::Eps
                     | enums::PaymentMethodType::Fps
                     | enums::PaymentMethodType::Evoucher
@@ -1272,7 +1276,6 @@ impl TryFrom<&domain::PayLaterData> for PaypalPaymentsRequest {
         match value {
             domain::PayLaterData::KlarnaRedirect { .. }
             | domain::PayLaterData::KlarnaSdk { .. }
-            | domain::PayLaterData::KlarnaCheckout {}
             | domain::PayLaterData::AffirmRedirect {}
             | domain::PayLaterData::AfterpayClearpayRedirect { .. }
             | domain::PayLaterData::PayBrightRedirect {}
@@ -1858,7 +1861,7 @@ impl<F, T>
                     .clone()
                     .or(Some(item.response.id)),
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })
@@ -1983,7 +1986,7 @@ impl<F, T>
                     purchase_units.map_or(item.response.id, |item| item.invoice_id.clone()),
                 ),
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })
@@ -2038,7 +2041,7 @@ impl
                     purchase_units.map_or(item.response.id, |item| item.invoice_id.clone()),
                 ),
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })
@@ -2091,7 +2094,7 @@ impl
                 network_txn_id: None,
                 connector_response_reference_id: None,
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })
@@ -2129,7 +2132,7 @@ impl<F>
                 network_txn_id: None,
                 connector_response_reference_id: None,
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })
@@ -2182,7 +2185,7 @@ impl<F>
                 network_txn_id: None,
                 connector_response_reference_id: None,
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })
@@ -2251,7 +2254,7 @@ impl<F, T>
                     .clone()
                     .or(Some(item.response.supplementary_data.related_ids.order_id)),
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })
@@ -2592,7 +2595,7 @@ impl TryFrom<types::PaymentsCaptureResponseRouterData<PaypalCaptureResponse>>
                     .invoice_id
                     .or(Some(item.response.id)),
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             amount_captured: Some(amount_captured),
             ..item.data
@@ -2644,7 +2647,7 @@ impl<F, T>
                     .invoice_id
                     .or(Some(item.response.id)),
                 incremental_authorization_allowed: None,
-                charge_id: None,
+                charges: None,
             }),
             ..item.data
         })

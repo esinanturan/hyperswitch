@@ -406,6 +406,8 @@ pub trait ConnectorActions: Connector {
                 split_refunds: None,
                 integrity_object: None,
                 refund_status: enums::RefundStatus::Pending,
+                merchant_account_id: None,
+                merchant_config_currency: None,
             }),
             payment_info,
         );
@@ -471,6 +473,7 @@ pub trait ConnectorActions: Connector {
                 }),
                 vendor_details: None,
                 priority: None,
+                connector_transfer_method_id: None,
             },
             payment_info,
         )
@@ -979,6 +982,8 @@ impl Default for PaymentAuthorizeType {
             merchant_order_reference_id: None,
             additional_payment_method_data: None,
             shipping_cost: None,
+            merchant_account_id: None,
+            merchant_config_currency: None,
         };
         Self(data)
     }
@@ -1022,6 +1027,7 @@ impl Default for BrowserInfoType {
             device_model: Some("Apple IPHONE 7".to_string()),
             os_type: Some("IOS or ANDROID".to_string()),
             os_version: Some("IOS 14.5".to_string()),
+            accept_language: Some("en".to_string()),
         };
         Self(data)
     }
@@ -1067,6 +1073,8 @@ impl Default for PaymentRefundType {
             split_refunds: None,
             integrity_object: None,
             refund_status: enums::RefundStatus::Pending,
+            merchant_account_id: None,
+            merchant_config_currency: None,
         };
         Self(data)
     }
@@ -1132,7 +1140,7 @@ pub fn get_connector_metadata(
             network_txn_id: _,
             connector_response_reference_id: _,
             incremental_authorization_allowed: _,
-            charge_id: _,
+            charges: _,
         }) => connector_metadata,
         _ => None,
     }
