@@ -246,7 +246,7 @@ pub async fn set_sso_id_in_redis(
     let connection = get_redis_connection(state)?;
     let key = get_oidc_key(&oidc_state.expose());
     connection
-        .set_key_with_expiry(&key, sso_id, REDIS_SSO_TTL)
+        .set_key_with_expiry(&key.into(), sso_id, REDIS_SSO_TTL)
         .await
         .change_context(UserErrors::InternalServerError)
         .attach_printable("Failed to set sso id in redis")
@@ -259,7 +259,7 @@ pub async fn get_sso_id_from_redis(
     let connection = get_redis_connection(state)?;
     let key = get_oidc_key(&oidc_state.expose());
     connection
-        .get_key::<Option<String>>(&key)
+        .get_key::<Option<String>>(&key.into())
         .await
         .change_context(UserErrors::InternalServerError)
         .attach_printable("Failed to get sso id from redis")?
@@ -286,6 +286,7 @@ pub fn is_sso_auth_type(auth_type: UserAuthType) -> bool {
 pub fn create_merchant_account_request_for_org(
     req: user_api::UserOrgMerchantCreateRequest,
     org: organization::Organization,
+    product_type: common_enums::MerchantProductType,
 ) -> UserResult<api_models::admin::MerchantAccountCreate> {
     let merchant_id = if matches!(env::which(), env::Env::Production) {
         id_type::MerchantId::try_from(domain::MerchantId::new(req.merchant_name.clone().expose())?)?
@@ -315,6 +316,7 @@ pub fn create_merchant_account_request_for_org(
         enable_payment_response_hash: None,
         redirect_to_merchant_with_http_post: None,
         pm_collect_link_config: None,
+        product_type: Some(product_type),
     })
 }
 
